@@ -37,13 +37,13 @@ module Shodan
     attr_reader :http_version
 
     # The HTTP status code in the response
-    attr_reader :code
+    attr_reader :http_code
 
     # The HTTP status string in the response
-    attr_reader :status
+    attr_reader :http_status
 
     # The HTTP headers included in the response
-    attr_reader :headers
+    attr_reader :http_headers
 
     #
     # Creates a new host with the given _ip_, _data_, _response_ and _hostname_.
@@ -55,9 +55,9 @@ module Shodan
       @hostname = hostname
 
       @http_version = nil
-      @code = nil
-      @status = nil
-      @headers = {}
+      @http_code = nil
+      @http_status = nil
+      @http_headers = {}
 
       if response =~ /^HTTP\/?/
         lines = response.split("\r")
@@ -68,15 +68,15 @@ module Shodan
         end
 
         if match[2]
-          @code = match[2].to_i
+          @http_code = match[2].to_i
         end
 
-        @status = match[3]
+        @http_status = match[3]
 
         lines[1..-1].each do |line|
           name, value = line.chomp.split(/:\s+/,2)
 
-          @headers[name] = value
+          @http_headers[name] = value
         end
       end
     end
@@ -85,7 +85,7 @@ module Shodan
     # Returns the Server software name.
     #
     def server_name
-      if (server = @headers['Server'])
+      if (server = @http_headers['Server'])
         return server.split('/',2).first
       end
     end
@@ -94,7 +94,7 @@ module Shodan
     # Returns the Server software version.
     #
     def server_version
-      if (server = @headers['Server'])
+      if (server = @http_headers['Server'])
         return server.split('/',2).last
       end
     end
@@ -106,7 +106,7 @@ module Shodan
       if (args.empty? && block.nil?)
         name = sym.id2name.sub('_','-').capitalize
 
-        return @headers[name] if @headers.key?(name)
+        return @http_headers[name] if @http_headers.key?(name)
       end
 
       return super(sym,*args,&block)
