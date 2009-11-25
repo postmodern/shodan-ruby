@@ -1,5 +1,5 @@
 #
-# shodanrb - A Ruby interface to SHODAN, a computer search engine.
+# shodan-ruby - A Ruby interface to SHODAN, a computer search engine.
 #
 # Copyright (c) 2009 Hal Brodigan (postmodern.mod3 at gmail.com)
 #

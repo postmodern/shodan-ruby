@@ -5,7 +5,7 @@ require 'hoe'
 require 'hoe/signing'
 require './tasks/spec.rb'
 
-Hoe.spec('shodanrb') do
+Hoe.spec('shodan-ruby') do
   self.developer('Postmodern', 'postmodern.mod3@gmail.com')
 
   self.extra_deps = [

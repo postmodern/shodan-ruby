@@ -1,4 +1,4 @@
-= shodanrb
+= shodan-ruby
 
 * http://github.com/postmodern/shodanrb
 
@@ -81,11 +81,11 @@ A Ruby interface to SHODAN, a computer search engine.
 
 == INSTALL:
 
-  $ sudo gem install shodanrb
+  $ sudo gem install shodan-ruby
 
 == LICENSE:
 
-shodanrb - A Ruby interface to SHODAN, a computer search engine.
+shodan-ruby - A Ruby interface to SHODAN, a computer search engine.
 
 Copyright (c) 2009 Hal Brodigan (postmodern.mod3 at gmail.com)
 
