@@ -1,6 +1,6 @@
 = shodan-ruby
 
-* http://github.com/postmodern/shodanrb
+* http://github.com/postmodern/shodan-ruby
 
 == DESCRIPTION:
 
