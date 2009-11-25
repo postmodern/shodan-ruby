@@ -160,8 +160,8 @@ module Shodan
       end
     end
 
-    def http_codes
-      Enumerator.new(self,:each_status_code).to_a
+    def http_statuses
+      Enumerator.new(self,:each_http_status).to_a
     end
 
     def each_headers(&block)
