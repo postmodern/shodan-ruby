@@ -100,7 +100,7 @@ module Shodan
       end
     end
 
-    def names
+    def hostnames
       Enumerator.new(self,:each_hostname)
     end
 
