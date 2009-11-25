@@ -16,6 +16,65 @@ A Ruby interface to SHODAN, a computer search engine.
 
 == EXAMPLES:
 
+* Basic query:
+
+    require 'shodan'
+
+    q = Shodan.query(:query => 'ssh')
+
+* Advanced query:
+
+    q = Shodan.query(:query => 'login') do |q|
+      q.ports += [21, 23, 80, 25]
+      q.networks << '112.0.0.0/8'
+    end
+
+* Queries from URLs:
+
+    q = Shodan::Query.from_url('http://shodan.surtri.com/?q=login+port%3A21+port%3A23')
+
+    q.query
+    # => "login port:21 port:23"
+
+* Getting the search results:
+
+    q.first_page.select do |host|
+      host.response =~ /HTTP\1.[01] 200/
+    end
+
+    q.page(2).map do |host|
+      host.headers['Server']
+    end
+
+    q.result_at(21)
+
+    q.top_result
+
+* A Host object contains the IP address, Date added, Hostname, Response
+  recorded and parsed HTTP version, HTTP code, HTTP status
+  and HTTP headers.
+
+    page = q.page(2)
+
+    page.ips #=> [...]
+    page.hostnames => [...]
+    page.dates => [...]
+    page.responses => [...]
+    page.http_versions => [...]
+    page.http_codes => [...]
+    page.http_statuses=> [...]
+    page.http_headers => [...]
+
+* Iterating over the search results:
+
+    q.each_on_page(2) do |host|
+      puts host.ip
+    end
+
+    page.each do |host|
+      puts "#{host.date} #{host.ip}"
+    end
+
 == REQUIREMENTS:
 
 * {mechanize}[http://mechanize.rubyforge.org] >= 0.9.3
