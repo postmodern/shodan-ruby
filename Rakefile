@@ -9,7 +9,7 @@ Hoe.spec('shodanrb') do
   self.developer('Postmodern', 'postmodern.mod3@gmail.com')
 
   self.extra_deps = [
-    ['nokogiri', '>=1.4.0']
+    ['mechanize', '>=0.9.3']
   ]
 
   self.extra_dev_deps = [

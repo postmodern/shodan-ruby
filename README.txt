@@ -18,7 +18,7 @@ A Ruby interface to SHODAN, a computer search engine.
 
 == REQUIREMENTS:
 
-* {nokogiri}[http://nokogiri.rubyforge.org] >= 1.4.0
+* {mechanize}[http://mechanize.rubyforge.org] >= 0.9.3
 
 == INSTALL:
 
