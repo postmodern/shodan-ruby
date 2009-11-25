@@ -1,6 +1,7 @@
 = shodan-ruby
 
 * http://github.com/postmodern/shodan-ruby
+* http://shodan.surtri.com/
 
 == DESCRIPTION:
 
