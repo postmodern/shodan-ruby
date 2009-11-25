@@ -42,16 +42,16 @@ module Shodan
     attr_accessor :query
 
     # Countries to search within
-    attr_reader :countries
+    attr_accessor :countries
 
     # Hostnames to search for
-    attr_reader :hostnames
+    attr_accessor :hostnames
 
     # CIDR Network blocks to search within
-    attr_reader :networks
+    attr_accessor :networks
 
     # Ports to search for
-    attr_reader :ports
+    attr_accessor :ports
 
     def initialize(options={},&block)
       @agent = Shodan.web_agent
