@@ -35,7 +35,7 @@ describe Query do
         :hostnames => ['www.wired.com']
       )
 
-      q.expression.should == 'http host:www.wired.com'
+      q.expression.should == 'http hostname:www.wired.com'
     end
 
     it "should support the net search operator" do

@@ -110,7 +110,7 @@ module Shodan
       expr << @query if @query
 
       expr += @countries.map { |code| "country:#{code}" }
-      expr += @hostnames.map { |host| "host:#{host}" }
+      expr += @hostnames.map { |host| "hostname:#{host}" }
       expr += @networks.map { |net| "net:#{net}" }
       expr += @ports.map { |port| "port:#{port}" }
 
