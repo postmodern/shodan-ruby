@@ -1,10 +1,11 @@
 require 'shodan/shodan'
+require 'shodan/version'
 
 require 'spec_helper'
 
 describe "Shodan" do
   it "should have a VERSION constant" do
-    Shodan.constant_defined?('VERSION').should == true
+    Shodan.const_defined?('VERSION').should == true
   end
 
   describe "User-Agent support" do
