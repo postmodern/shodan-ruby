@@ -45,6 +45,9 @@ module Shodan
     # The HTTP headers included in the response
     attr_reader :http_headers
 
+    # The body of the HTTP response
+    attr_reader :http_body
+
     #
     # Creates a new host with the given _ip_, _data_, _response_ and _hostname_.
     #
@@ -58,6 +61,7 @@ module Shodan
       @http_code = nil
       @http_status = nil
       @http_headers = {}
+      @http_body = nil
 
       if response =~ /^HTTP\/?/
         lines = response.split("\r")
@@ -72,8 +76,14 @@ module Shodan
         end
 
         @http_status = match[3]
+        @http_body = ''
 
-        lines[1..-1].each do |line|
+        lines[1..-1].each_with_index do |line,index|
+          if line.empty?
+            @http_body = lines[index..-1].join("\n")
+            break
+          end
+
           name, value = line.chomp.split(/:\s+/,2)
 
           @http_headers[name] = value
