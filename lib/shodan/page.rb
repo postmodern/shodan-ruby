@@ -86,13 +86,13 @@ module Shodan
 
     def each_hostname(&block)
       each do |host|
-        block.call(host.name) if (block && host.name)
+        block.call(host.hostname) if (block && host.hostname)
       end
     end
 
     def hosts_with_name(name,&block)
       hosts_with do |host|
-        if (host.name && host.name.match(name))
+        if (host.hostname && host.hostname.match(name))
           block.call(host) if block
 
           true
