@@ -53,7 +53,7 @@ module Shodan
     #
     def initialize(ip,date,response,hostname=nil)
       @ip = ip
-      @date = date
+      @date = Date.parse(date)
       @response = response
       @hostname = hostname
 
