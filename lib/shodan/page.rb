@@ -101,7 +101,7 @@ module Shodan
     end
 
     def hostnames
-      Enumerator.new(self,:each_hostname)
+      Enumerator.new(self,:each_hostname).to_a
     end
 
     def each_date(&block)
