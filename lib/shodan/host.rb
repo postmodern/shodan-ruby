@@ -109,6 +109,8 @@ module Shodan
       end
     end
 
+    protected
+
     #
     # Provides transparent access to the values in +headers+.
     #
