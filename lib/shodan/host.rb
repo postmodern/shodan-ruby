@@ -80,7 +80,7 @@ module Shodan
 
         lines[1..-1].each_with_index do |line,index|
           if line.empty?
-            @http_body = lines[index..-1].join("\n")
+            @http_body = lines[(index+2)..-1].join("\n")
             break
           end
 
