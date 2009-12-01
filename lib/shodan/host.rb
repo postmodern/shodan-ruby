@@ -64,18 +64,18 @@ module Shodan
       @http_body = nil
 
       if response =~ /^HTTP\/?/
-        lines = response.split("\r")
+        lines = response.split(/[\r\n]/)
         match = lines.first.split(/\s+/,3)
 
         if match[0].include?('/')
           @http_version = match[0].split('/').last
         end
 
-        if match[2]
-          @http_code = match[2].to_i
+        if match[1]
+          @http_code = match[1].to_i
         end
 
-        @http_status = match[3]
+        @http_status = match[2]
         @http_body = ''
 
         lines[1..-1].each_with_index do |line,index|
