@@ -16,6 +16,7 @@ lib/shodan/shodan.rb
 lib/shodan/version.rb
 tasks/spec.rb
 spec/spec_helper.rb
+spec/page_spec.rb
 spec/page_has_hosts_examples.rb
 spec/has_pages_examples.rb
 spec/query_spec.rb
