@@ -90,6 +90,24 @@ X-pingback: http://chrislea.com/xmlrpc.php
       }
     end
 
+    it "should provide a server name" do
+      @host.server_name.should == 'nginx'
+    end
+
+    it "should provide a server version" do
+      @host.server_version.should == '0.8.24'
+    end
+
+    it "should provide transparent access to the HTTP response headers" do
+      @host.x_the_question.should == 'Quis custodiet ipsos custodes?'
+    end
+
+    it "should raise a NoMethodError when accessing missing headers" do
+      lambda {
+        @host.lol
+      }.should raise_error(NoMethodError)
+    end
+
     it "should not have a HTTP response body" do
       @host.http_body.should == "<HTML>\n</HTML>"
     end
