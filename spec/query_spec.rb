@@ -2,6 +2,7 @@ require 'shodan/query'
 
 require 'spec_helper'
 require 'has_pages_examples'
+require 'page_has_hosts_examples'
 
 describe Query do
   before(:all) do
@@ -10,6 +11,7 @@ describe Query do
   end
 
   it_should_behave_like "has Pages"
+  it_should_behave_like "Page has Hosts"
 
   describe "query expression" do
     it "should support basic queries" do
