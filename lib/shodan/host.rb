@@ -116,7 +116,7 @@ module Shodan
     #
     def method_missing(sym,*args,&block)
       if (args.empty? && block.nil?)
-        name = sym.id2name.sub('_','-').capitalize
+        name = sym.id2name.gsub(/_/,'-').capitalize
 
         return @http_headers[name] if @http_headers.key?(name)
       end
