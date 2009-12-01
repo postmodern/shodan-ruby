@@ -151,7 +151,7 @@ module Shodan
                        host_node.inner_text
                      end
 
-          date = result.at('div/span').inner_text.split(' ').last
+          date = result.at('div/span').inner_text.scan(/\d+\.\d+\.\d/).first
           response = result.at('p').inner_text.strip
 
           new_page << Host.new(ip,date,response,hostname)
