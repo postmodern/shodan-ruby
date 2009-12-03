@@ -49,8 +49,19 @@ module Shodan
     attr_reader :http_body
 
     #
-    # Creates a new host with the given _ip_, _data_, _response_ and
-    # _hostname_.
+    # Creates a new Host object.
+    #
+    # @param [String] ip
+    #   The IP address of the host.
+    #
+    # @param [String] date
+    #   The date the host was added.
+    #
+    # @param [String] response
+    #   The response received from the host.
+    #
+    # @param [String] hostname
+    #   The optional name of the host.
     #
     def initialize(ip,date,response,hostname=nil)
       @ip = ip
@@ -93,7 +104,10 @@ module Shodan
     end
 
     #
-    # Returns the Server software name.
+    # The server software the host runs.
+    #
+    # @return [String]
+    #   The name of the software.
     #
     def server_name
       if (server = @http_headers['Server'])
@@ -102,7 +116,10 @@ module Shodan
     end
 
     #
-    # Returns the Server software version.
+    # The server software version.
+    #
+    # @return [String]
+    #   The version of the software.
     #
     def server_version
       if (server = @http_headers['Server'])
