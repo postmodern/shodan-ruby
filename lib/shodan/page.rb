@@ -164,14 +164,14 @@ module Shodan
       Enumerator.new(self,:each_http_status).to_a
     end
 
-    def each_headers(&block)
+    def each_http_headers(&block)
       each do |host|
-        block.call(host.headers) if block
+        block.call(host.http_headers) if block
       end
     end
 
-    def headers
-      Enumerator.new(self,:each_headers).to_a
+    def http_headers
+      Enumerator.new(self,:each_http_headers).to_a
     end
 
   end
