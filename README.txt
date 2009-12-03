@@ -63,20 +63,40 @@ A Ruby interface to SHODAN, a computer search engine.
     page.each_ip { |ip| puts ip }
 
     page.hostnames
-    page.each_hostname
+    page.each_hostname { |hostname| puts hostname }
 
     page.dates
-    page.each_date
+    page.each_date { |date| puts date }
 
     page.responses
-    page.each_response
+    page.each_response { |resp| puts resp }
 
     page.http_versions
+    page.each_http_version { |version| puts version }
+
     page.http_codes
+    page.each_http_code { |code| puts code }
+
     page.http_statuses
+    page.each_http_status { |status| puts status }
+
     page.http_headers
+    page.each_http_headers do |headers| 
+      headers.each do |name,value|
+        puts "#{name}: #{value}"
+      end
+    end
 
 * Select specific hosts from a page:
+
+    page.hosts_with_ip(/\.1$/)
+    # => [...]
+
+    page.hosts_with_name("mail")
+    # => [...]
+
+    page.responses_with("Server")
+    # => [...]
 
 * Iterating over the hosts on a page:
 
