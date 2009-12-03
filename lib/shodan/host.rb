@@ -49,7 +49,8 @@ module Shodan
     attr_reader :http_body
 
     #
-    # Creates a new host with the given _ip_, _data_, _response_ and _hostname_.
+    # Creates a new host with the given _ip_, _data_, _response_ and
+    # _hostname_.
     #
     def initialize(ip,date,response,hostname=nil)
       @ip = ip
