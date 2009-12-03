@@ -57,14 +57,22 @@ A Ruby interface to SHODAN, a computer search engine.
 
     page = q.page(2)
 
-    page.ips #=> [...]
-    page.hostnames => [...]
-    page.dates => [...]
-    page.responses => [...]
-    page.http_versions => [...]
-    page.http_codes => [...]
-    page.http_statuses=> [...]
-    page.http_headers => [...]
+    page.ips
+    page.each_ip { |ip| puts ip }
+
+    page.hostnames
+    page.each_hostname
+
+    page.dates
+    page.each_date
+
+    page.responses
+    page.each_response
+
+    page.http_versions
+    page.http_codes
+    page.http_statuses
+    page.http_headers
 
 * Iterating over the search results:
 
