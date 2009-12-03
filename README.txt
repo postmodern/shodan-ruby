@@ -71,15 +71,6 @@ A Ruby interface to SHODAN, a computer search engine.
     page.responses
     page.each_response { |resp| puts resp }
 
-    page.http_versions
-    page.each_http_version { |version| puts version }
-
-    page.http_codes
-    page.each_http_code { |code| puts code }
-
-    page.http_statuses
-    page.each_http_status { |status| puts status }
-
     page.http_headers
     page.each_http_headers do |headers| 
       headers.each do |name,value|

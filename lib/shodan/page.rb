@@ -276,36 +276,6 @@ module Shodan
       Enumerator.new(self,:each_response).to_a
     end
 
-    def each_http_version(&block)
-      each do |host|
-        block.call(host.http_version) if block
-      end
-    end
-
-    def http_versions
-      Enumerator.new(self,:each_http_version).to_a
-    end
-
-    def each_http_code(&block)
-      each do |host|
-        block.call(host.http_code) if block
-      end
-    end
-
-    def http_codes
-      Enumerator.new(self,:each_http_code).to_a
-    end
-
-    def each_http_status(&block)
-      each do |host|
-        block.call(host.http_status) if block
-      end
-    end
-
-    def http_statuses
-      Enumerator.new(self,:each_http_status).to_a
-    end
-
     #
     # Itereates over the HTTP headers of each host in the page.
     #
