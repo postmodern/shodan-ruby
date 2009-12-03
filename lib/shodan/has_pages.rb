@@ -100,7 +100,7 @@ module Shodan
     #
     # Returns the Result at the specified _index_.
     #
-    def result_at(index)
+    def host_at(index)
       page(page_index_of(index))[result_index_of(index)]
     end
 
