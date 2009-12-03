@@ -53,6 +53,16 @@ A Ruby interface to SHODAN, a computer search engine.
 
     q.first_host
 
+* Iterating over the hosts on a page:
+
+    q.each_on_page(2) do |host|
+      puts host.ip
+    end
+
+    page.each do |host|
+      puts "#{host.date} #{host.ip}"
+    end
+
 * A Host object contains the IP address, Date added, Hostname, Response
   recorded and parsed HTTP version, HTTP code, HTTP status
   and HTTP headers.
@@ -88,16 +98,6 @@ A Ruby interface to SHODAN, a computer search engine.
 
     page.responses_with("Server")
     # => [...]
-
-* Iterating over the hosts on a page:
-
-    q.each_on_page(2) do |host|
-      puts host.ip
-    end
-
-    page.each do |host|
-      puts "#{host.date} #{host.ip}"
-    end
 
 == REQUIREMENTS:
 
