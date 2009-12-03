@@ -93,7 +93,7 @@ module Shodan
     #
     # Returns the first Result on the first_page.
     #
-    def top_result
+    def first_host
       first_page.first
     end
 
