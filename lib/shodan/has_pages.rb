@@ -71,8 +71,11 @@ module Shodan
     # @yieldparam [Page] page
     #   The page at one of the specified indices.
     #
+    # @return [self]
+    #
     def each_page(indices,&block)
       indices.map { |index| block.call(page_cache[index]) }
+      return self
     end
 
     #
@@ -141,6 +144,8 @@ module Shodan
     #
     # @yieldparam [Host] host
     #   A host on one of the pages at the specified indices.
+    #
+    # @return [self]
     #
     def each_on_pages(indices,&block)
       each_page(indices) { |page| page.each(&block) }

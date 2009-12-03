@@ -101,6 +101,8 @@ module Shodan
     # @yieldparam [String] ip
     #   An IP address of a host.
     #
+    # @return [self]
+    #
     def each_ip(&block)
       each do |host|
         block.call(host.ip) if block
@@ -150,6 +152,8 @@ module Shodan
     #
     # @yieldparam [String] hostname
     #   A host name.
+    #
+    # @return [self]
     #
     def each_hostname(&block)
       each do |host|
@@ -202,6 +206,8 @@ module Shodan
     # @yieldparam [Date] date
     #   A date that a host was added.
     #
+    # @return [self]
+    #
     def each_date(&block)
       each do |host|
         block.call(host.date) if block
@@ -226,6 +232,8 @@ module Shodan
     #
     # @yieldparam [String] response
     #   The initial response of a host.
+    #
+    # @return [self]
     #
     def each_response(&block)
       each do |host|
@@ -307,6 +315,8 @@ module Shodan
     #
     # @yieldparam [Hash] headers
     #   The headers from a host in the page.
+    #
+    # @return [self]
     #
     def each_http_headers(&block)
       each do |host|
