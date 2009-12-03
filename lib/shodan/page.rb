@@ -24,8 +24,16 @@ module Shodan
   class Page < Array
 
     #
-    # Creates a new Page object with the given _hosts_. If a _block_
-    # is given, it will be passed the newly created Page object.
+    # Creates a new Page object.
+    #
+    # @param [Array] hosts
+    #   The initial hosts.
+    #
+    # @yield [page]
+    #   If a block is given, it will be passed the page.
+    #
+    # @yieldparam [Page] page
+    #   The newly created Page object.
     #
     def initialize(hosts=[],&block)
       super(hosts)
@@ -34,13 +42,22 @@ module Shodan
     end
 
     #
-    # Returns a mapped Array of the hosts within the Page using the
-    # given _block_. If the _block_ is not given, the page will be
-    # returned.
+    # Maps the hosts within the page.
     #
+    # @yield [host]
+    #   The given block will be used to map each host in the page.
+    #
+    # @yieldparam [Host] host
+    #   A host within the page.
+    #
+    # @return [Array]
+    #   The resulting mapped Array.
+    #
+    # @example
     #   page.map
     #   # => #<Page: ...>
     #
+    # @example
     #   page.map { |host| host.ip }
     #   # => [...]
     #
@@ -54,8 +71,18 @@ module Shodan
     end
 
     #
-    # Selects the hosts within the Page which match the given _block_.
+    # Selects the hosts within the page.
     #
+    # @yield [host]
+    #   The given block will be used to select hosts from the page.
+    #
+    # @yieldparam [Host] host
+    #   A host in the page.
+    #
+    # @return [Page]
+    #   A sub-set of the hosts within the page.
+    #
+    # @example
     #   page.select { |host| host.headers['Server'] =~ /IIS/ }
     #
     def select(&block)
@@ -64,12 +91,37 @@ module Shodan
 
     alias hosts_with select
 
+    #
+    # Iterates over the IP addresses of every host in the page.
+    #
+    # @yield [ip]
+    #   If a block is given, it will be passed the IP addresses of every
+    #   host.
+    #
+    # @yieldparam [String] ip
+    #   An IP address of a host.
+    #
     def each_ip(&block)
       each do |host|
         block.call(host.ip) if block
       end
     end
 
+    #
+    # Selects the hosts with the matching IP address.
+    #
+    # @param [Regexp, String] ip
+    #   The IP address to search for.
+    #
+    # @yield [host]
+    #   If a block is also given, it will be passed every matching host.
+    #
+    # @yieldparam [Host] host
+    #   A host with the matching IP address.
+    #
+    # @return [Array<Host>]
+    #   The hosts with the matching IP address.
+    #
     def hosts_with_ip(ip,&block)
       hosts_with do |host|
         if host.ip.match(ip)
@@ -80,16 +132,46 @@ module Shodan
       end
     end
 
+    #
+    # The IP addresses of the hosts in the page.
+    #
+    # @return [Array<String>]
+    #   The IP addresses.
+    #
     def ips
       Enumerator.new(self,:each_ip).to_a
     end
 
+    #
+    # Iterates over the host names of every host in the page.
+    #
+    # @yield [hostname]
+    #   If a block is given, it will be passed the host names of every host.
+    #
+    # @yieldparam [String] hostname
+    #   A host name.
+    #
     def each_hostname(&block)
       each do |host|
         block.call(host.hostname) if (block && host.hostname)
       end
     end
 
+    #
+    # Selects the hosts with the matching host name.
+    #
+    # @param [Regexp, String] hostname
+    #   The host name to search for.
+    #
+    # @yield [host]
+    #   If a block is also given, it will be passed every matching host.
+    #
+    # @yieldparam [Host] host
+    #   A host with the matching host name.
+    #
+    # @return [Array<Host>]
+    #   The hosts with the matching host name.
+    #
     def hosts_with_name(name,&block)
       hosts_with do |host|
         if (host.hostname && host.hostname.match(name))
@@ -100,26 +182,72 @@ module Shodan
       end
     end
 
+    #
+    # The names of the hosts in the page.
+    #
+    # @return [Array<String>]
+    #   The host names.
+    #
     def hostnames
       Enumerator.new(self,:each_hostname).to_a
     end
 
+    #
+    # Iterates over the dates that each host was added.
+    #
+    # @yield [date]
+    #   If a block is given, it will be passed the dates that each host was
+    #   added.
+    #
+    # @yieldparam [Date] date
+    #   A date that a host was added.
+    #
     def each_date(&block)
       each do |host|
         block.call(host.date) if block
       end
     end
 
+    #
+    # The dates that the hosts were added.
+    #
+    # @return [Array<Date>]
+    #   The dates.
+    #
     def dates
       Enumerator.new(self,:each_date).to_a
     end
 
+    #
+    # Iterates over the responses of each host in the page.
+    #
+    # @yield [response]
+    #   If a block is given, it will be passed the responses of each host.
+    #
+    # @yieldparam [String] response
+    #   The initial response of a host.
+    #
     def each_response(&block)
       each do |host|
         block.call(host.response) if block
       end
     end
 
+    #
+    # Selects the hosts with the matching response.
+    #
+    # @param [Regexp, String] pattern
+    #   The response pattern to search for.
+    #
+    # @yield [host]
+    #   If a block is also given, it will be passed every matching host.
+    #
+    # @yieldparam [Host] host
+    #   A host with the matching response.
+    #
+    # @return [Array<Host>]
+    #   The hosts with the matching response.
+    #
     def responses_with(pattern,&block)
       hosts_with do |host|
         if host.response.match(pattern)
@@ -130,6 +258,12 @@ module Shodan
       end
     end
 
+    #
+    # The responses of the hosts in the page.
+    #
+    # @return [Array<String>]
+    #   The responses.
+    #
     def responses(&block)
       Enumerator.new(self,:each_response).to_a
     end
@@ -164,12 +298,28 @@ module Shodan
       Enumerator.new(self,:each_http_status).to_a
     end
 
+    #
+    # Itereates over the HTTP headers of each host in the page.
+    #
+    # @yield [headers]
+    #   If a block is given, it will be passed the headers from each host
+    #   in the page.
+    #
+    # @yieldparam [Hash] headers
+    #   The headers from a host in the page.
+    #
     def each_http_headers(&block)
       each do |host|
         block.call(host.http_headers) if block
       end
     end
 
+    #
+    # The HTTP headers from the hosts in the page.
+    #
+    # @return [Array<Hash>]
+    #   The HTTP headers.
+    #
     def http_headers
       Enumerator.new(self,:each_http_headers).to_a
     end
