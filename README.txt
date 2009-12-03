@@ -14,6 +14,8 @@ A Ruby interface to SHODAN, a computer search engine.
 * Supports +hostname+ search operator.
 * Supports +net+ search operator.
 * Supports +port+ search operator.
+* SHODAN does not support queries with non-alphanumeric characters within
+  them.
 
 == EXAMPLES:
 
