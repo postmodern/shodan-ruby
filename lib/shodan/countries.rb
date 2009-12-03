@@ -263,6 +263,10 @@ module Shodan
     Moldova = 'MD'
     CentralAfricanRepublic = 'CF'
 
+    #
+    # Iterates over every Country Code, passing ech one to the given
+    # _block_.
+    #
     def Countries.each(&block)
       self.constants.each do |name|
         block.call(self.constant_get(name)) if block
