@@ -8,6 +8,7 @@ lib/shodan/extensions.rb
 lib/shodan/extensions/uri.rb
 lib/shodan/extensions/uri/query_params.rb
 lib/shodan/extensions/uri/http.rb
+lib/shodan/countries.rb
 lib/shodan/host.rb
 lib/shodan/page.rb
 lib/shodan/has_pages.rb
