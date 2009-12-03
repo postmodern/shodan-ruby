@@ -38,7 +38,17 @@ module URI
     end
 
     #
-    # Sets the query data and updates query_params.
+    # Sets the query string and updates query_params.
+    #
+    # @param [String] query_str
+    #   The new URI query string to use.
+    #
+    # @return [String]
+    #   The new URI query string.
+    #
+    # @example
+    #   url.query = 'a=1&b=2'
+    #   # => "a=1&b=2"
     #
     def query=(query_str)
       new_query = super(query_str)
@@ -70,7 +80,6 @@ module URI
 
     private
 
-    # :nodoc
     def path_query
       str = @path
 
