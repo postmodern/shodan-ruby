@@ -264,8 +264,16 @@ module Shodan
     CentralAfricanRepublic = 'CF'
 
     #
-    # Iterates over every Country Code, passing ech one to the given
-    # _block_.
+    # Iterates over every Country Code.
+    #
+    # @yield [country]
+    #   The given block will receive every Country Code.
+    #
+    # @yieldparam [String] country
+    #   The ISO 3166-1993 Country Code.
+    #
+    # @return [Countries]
+    #   The Countries module.
     #
     def Countries.each(&block)
       self.constants.each do |name|
