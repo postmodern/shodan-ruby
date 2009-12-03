@@ -53,6 +53,46 @@ module Shodan
     # Ports to search for
     attr_accessor :ports
 
+    #
+    # Creates a new Query object.
+    #
+    # @param [Hash] options
+    #   Additional options.
+    #
+    # @option options [String] :query
+    #   The query expression.
+    #
+    # @option options [Array<String>] :countries
+    #   The Country Codes to search within.
+    #
+    # @option options [String] :country
+    #   A Country Code to search within.
+    #
+    # @option options [Array<String>] :hostnames
+    #   The host names to search for.
+    #
+    # @option options [String] :hostname
+    #   A host name to search for.
+    #
+    # @option options [Array<String>] :networks
+    #   The CIDR network blocks to search within.
+    #
+    # @option options [String] :network
+    #   A CIDR network blocks to search within.
+    #
+    # @option options [Array<Integer>] :ports
+    #   The ports to search for.
+    #
+    # @option options [Integer] :port
+    #   A port to search for.
+    #
+    # @yield [query]
+    #   If a block is given, it will be passed the newly created Query
+    #   object.
+    #
+    # @yieldparam [Query] query
+    #   The newly created Query object.
+    #
     def initialize(options={},&block)
       @agent = Shodan.web_agent
       @query = options[:query]
@@ -92,6 +132,15 @@ module Shodan
       block.call(self) if block
     end
 
+    #
+    # Converts a given URL into a Query object.
+    #
+    # @param [URI::HTTP, String] url
+    #   The query URL.
+    #
+    # @return [Query]
+    #   The Query object created from the URL.
+    #
     def self.from_url(url)
       url = URI(url.to_s)
 
@@ -100,10 +149,24 @@ module Shodan
       )
     end
 
+    #
+    # The results per page.
+    #
+    # @return [Integer]
+    #   The resutls per page.
+    #
+    # @see RESULTS_PER_PAGE
+    #
     def results_per_page
       RESULTS_PER_PAGE
     end
 
+    #
+    # The query expression from the query.
+    #
+    # @return [String]
+    #   The query expression.
+    #
     def expression
       expr = []
 
@@ -117,6 +180,12 @@ module Shodan
       return expr.join(' ')
     end
 
+    #
+    # The search URL for the query.
+    #
+    # @return [URI::HTTP]
+    #   The search URL.
+    #
     def search_url
       url = URI(SEARCH_URL)
 
@@ -124,6 +193,15 @@ module Shodan
       return url
     end
 
+    #
+    # The search URL for the query and given page index.
+    #
+    # @param [Integer] index
+    #   The page index to lookup.
+    #
+    # @retrun [URI::HTTP]
+    #   The search URL for the query and the specified page index.
+    #
     def page_url(index)
       url = search_url
 
@@ -134,6 +212,15 @@ module Shodan
       return url
     end
 
+    #
+    # Requests a page at the given index.
+    #
+    # @param [Integer] index
+    #   The index of the page.
+    #
+    # @return [Page]
+    #   The page at the specified index.
+    #
     def page(index)
       Page.new do |new_page|
         doc = @agent.get(page_url(index))
