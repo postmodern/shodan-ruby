@@ -67,6 +67,14 @@ module Shodan
     end
 
     #
+    # Iterates over all hosts on all pages of the query, passing each host
+    # to the given _block_.
+    #
+    def each_host(&block)
+      each { |page| page.each(&block) }
+    end
+
+    #
     # Iterates over the elements on the page with the specified _index_,
     # passing each element to the specified _block_.
     #
