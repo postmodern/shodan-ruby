@@ -27,22 +27,32 @@ module Shodan
   COMMON_PROXY_PORT = 8080
 
   #
-  # Returns the +Hash+ of proxy information.
+  # The proxy information used by {Query}.
+  #
+  # @return [Hash]
+  #   The proxy information.
   #
   def Shodan.proxy
     @@shodan_proxy ||= {:host => nil, :port => COMMON_PROXY_PORT, :user => nil, :password => nil}
   end
 
   #
-  # Creates a HTTP URI based from the given _proxy_info_ hash. The
-  # _proxy_info_ hash defaults to Web.proxy, if not given.
+  # Creates a HTTP URI based from the given proxy information.
   #
-  # _proxy_info_ may contain the following keys:
-  # <tt>:host</tt>:: The proxy host.
-  # <tt>:port</tt>:: The proxy port. Defaults to COMMON_PROXY_PORT,
-  #                  if not specified.
-  # <tt>:user</tt>:: The user-name to login as.
-  # <tt>:password</tt>:: The password to login with.
+  # @param [Hash] proxy_info (Shodan.proxy)
+  #   The proxy information.
+  #
+  # @option proxy_info [String] :host
+  #   The host of the proxy.
+  #
+  # @option proxy_info [Integer] :port (COMMON_PROXY_PORT)
+  #   The port of the proxy.
+  #
+  # @option proxy_info [String] :user
+  #   The user name to authenticate as.
+  #
+  # @option proxy_info [String] :password
+  #   The password to authenticate with.
   #
   def Shodan.proxy_uri(proxy_info=Shodan.proxy)
     if Shodan.proxy[:host]
@@ -56,50 +66,85 @@ module Shodan
   end
   
   #
-  # Returns the supported Shodan User-Agent Aliases.
+  # The supported Shodan User-Agent Aliases.
+  #
+  # @return [Hash{String => String}]
+  #   The User-Agent aliases and strings.
   #
   def Shodan.user_agent_aliases
     WWW::Mechanize::AGENT_ALIASES
   end
 
   #
-  # Returns the Shodan User-Agent
+  # The default Shodan User-Agent
+  #
+  # @return [String]
+  #   The default User-Agent string used by Shodan.
   #
   def Shodan.user_agent
     @@shodan_user_agent ||= Shodan.user_agent_aliases['Windows IE 6']
   end
 
   #
-  # Sets the Shodan User-Agent to the specified _agent_.
+  # Sets the default Shodan User-Agent.
+  #
+  # @param [String] agent
+  #   The User-Agent string to use.
+  #
+  # @return [String]
+  #   The new User-Agent string.
   #
   def Shodan.user_agent=(agent)
     @@shodan_user_agent = agent
   end
 
   #
-  # Sets the Shodan User-Agent using the specified user-agent alias
-  # _name_.
+  # Sets the default Shodan User-Agent alias.
+  #
+  # @param [String] name
+  #   The alias of the User-Agent string to use.
+  #
+  # @return [String]
+  #   The new User-Agent string.
   # 
   def Shodan.user_agent_alias=(name)
     @@shodan_user_agent = Shodan.user_agent_aliases[name.to_s]
   end
 
   #
-  # Creates a new WWW::Mechanize agent with the given _options_.
+  # Creates a new WWW::Mechanize agent.
   #
-  # _options_ may contain the following keys:
-  # <tt>:user_agent_alias</tt>:: The User-Agent Alias to use.
-  # <tt>:user_agent</tt>:: The User-Agent string to use.
-  # <tt>:proxy</tt>:: A +Hash+ of proxy information which may
-  #                   contain the following keys:
-  #                   <tt>:host</tt>:: The proxy host.
-  #                   <tt>:port</tt>:: The proxy port.
-  #                   <tt>:user</tt>:: The user-name to login as.
-  #                   <tt>:password</tt>:: The password to login with.
+  # @param [Hash] options
+  #   Additional options.
   #
+  # @option options [String] :user_agent_alias
+  #   The User-Agent alias to use.
+  #
+  # @option options [String] :user_agent (Shodan.user_agent)
+  #   The User-Agent string to use.
+  #
+  # @option options [Hash] :proxy (Shodan.proxy)
+  #   The proxy information to use.
+  #
+  # @option :proxy [String] :host
+  #   The host of the proxy.
+  #
+  # @option :proxy [Integer] :port
+  #   The port of the proxy.
+  #
+  # @option :proxy [String] :user
+  #   The user to authenticate as.
+  #
+  # @option :proxy [String] :password
+  #   The password to authenticate with.
+  #
+  # @example Creating a new Mechanize agent.
   #   Shodan.web_agent
   #
+  # @example Creating a new Mechanize agent with a User-Agent alias.
   #   Shodan.web_agent(:user_agent_alias => 'Linux Mozilla')
+  #
+  # @example Creating a new Mechanize agent with a User-Agent string.
   #   Shodan.web_agent(:user_agent => 'Google Bot')
   #
   def Shodan.web_agent(options={},&block)
@@ -122,6 +167,49 @@ module Shodan
     return agent
   end
 
+  #
+  # Creates a new Query object.
+  #
+  # @param [Hash] options
+  #   Additional options.
+  #
+  # @option options [String] :query
+  #   The query expression.
+  #
+  # @option options [Array<String>] :countries
+  #   The Country Codes to search within.
+  #
+  # @option options [String] :country
+  #   A Country Code to search within.
+  #
+  # @option options [Array<String>] :hostnames
+  #   The host names to search for.
+  #
+  # @option options [String] :hostname
+  #   A host name to search for.
+  #
+  # @option options [Array<String>] :networks
+  #   The CIDR network blocks to search within.
+  #
+  # @option options [String] :network
+  #   A CIDR network blocks to search within.
+  #
+  # @option options [Array<Integer>] :ports
+  #   The ports to search for.
+  #
+  # @option options [Integer] :port
+  #   A port to search for.
+  #
+  # @yield [query]
+  #   If a block is given, it will be passed the newly created Query
+  #   object.
+  #
+  # @yieldparam [Query] query
+  #   The newly created Query object.
+  #
+  # @return [Query]
+  #   The new Query object.
+  #
   def Shodan.query(options={},&block)
     Query.new(options,&block)
   end
