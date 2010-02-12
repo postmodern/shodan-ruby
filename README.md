@@ -1,46 +1,47 @@
-= shodan-ruby
+# shodan-ruby
 
-* http://github.com/postmodern/shodan-ruby
-* http://shodan-ruby.rubyforge.org/
-* http://shodan.surtri.com/
+* [shodan-ruby.rubyforge.org](http://shodan-ruby.rubyforge.org/)
+* [github.com/postmodern/shodan-ruby](http://github.com/postmodern/shodan-ruby)
+* [github.com/postmodern/shodan-ruby/issues](http://github.com/postmodern/shodan-ruby/issues)
+* [shodan.surtri.com](http://shodan.surtri.com/)
 
-== DESCRIPTION:
+## DESCRIPTION:
 
 A Ruby interface to SHODAN, a computer search engine.
 
-== FEATURES/PROBLEMS:
+## FEATURES/PROBLEMS:
 
 * Supports basic queries.
-* Supports +country+ search operator.
-* Supports +hostname+ search operator.
-* Supports +net+ search operator.
-* Supports +port+ search operator.
+* Supports `country` search operator.
+* Supports `hostname` search operator.
+* Supports `net` search operator.
+* Supports `port` search operator.
 * SHODAN does not support queries with non-alphanumeric characters within
   them.
 
-== EXAMPLES:
+## EXAMPLES:
 
-* Basic query:
+Basic query:
 
     require 'shodan'
 
     q = Shodan.query(:query => 'ssh')
 
-* Advanced query:
+Advanced query:
 
     q = Shodan.query(:query => 'login') do |q|
       q.ports += [21, 23, 80, 25]
       q.networks << '112.0.0.0/8'
     end
 
-* Queries from URLs:
+Queries from URLs:
 
     q = Shodan::Query.from_url('http://shodan.surtri.com/?q=login+port%3A21+port%3A23')
 
     q.query
     # => "login port:21 port:23"
 
-* Getting the search results:
+Getting the search results:
 
     q.first_page.select do |host|
       host.response =~ /HTTP\1.[01] 200/
@@ -54,7 +55,7 @@ A Ruby interface to SHODAN, a computer search engine.
 
     q.first_host
 
-* Iterating over the hosts on a page:
+Iterating over the hosts on a page:
 
     q.each_on_page(2) do |host|
       puts host.ip
@@ -64,9 +65,9 @@ A Ruby interface to SHODAN, a computer search engine.
       puts "#{host.date} #{host.ip}"
     end
 
-* A Host object contains the IP address, Date added, Hostname, Response
-  recorded and parsed HTTP version, HTTP code, HTTP status
-  and HTTP headers.
+A Host object contains the IP address, Date added, Hostname, Response
+recorded and parsed HTTP version, HTTP code, HTTP status
+and HTTP headers.
 
     page = q.page(2)
 
@@ -89,7 +90,7 @@ A Ruby interface to SHODAN, a computer search engine.
       end
     end
 
-* Select specific hosts from a page:
+Select specific hosts from a page:
 
     page.hosts_with_ip(/\.1$/)
     # => [...]
@@ -100,15 +101,15 @@ A Ruby interface to SHODAN, a computer search engine.
     page.responses_with("Server")
     # => [...]
 
-== REQUIREMENTS:
+## REQUIREMENTS:
 
-* {mechanize}[http://mechanize.rubyforge.org] >= 0.9.3
+* [mechanize](http://mechanize.rubyforge.org) >= 0.9.3
 
-== INSTALL:
+## INSTALL:
 
-  $ sudo gem install shodan-ruby
+    $ sudo gem install shodan-ruby
 
-== LICENSE:
+## LICENSE:
 
 shodan-ruby - A Ruby interface to SHODAN, a computer search engine.
 

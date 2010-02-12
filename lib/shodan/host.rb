@@ -130,7 +130,7 @@ module Shodan
     protected
 
     #
-    # Provides transparent access to the values in +headers+.
+    # Provides transparent access to the values in `headers`.
     #
     def method_missing(sym,*args,&block)
       if (args.empty? && block.nil?)
