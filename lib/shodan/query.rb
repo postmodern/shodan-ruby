@@ -199,7 +199,7 @@ module Shodan
     # @param [Integer] index
     #   The page index to lookup.
     #
-    # @retrun [URI::HTTP]
+    # @return [URI::HTTP]
     #   The search URL for the query and the specified page index.
     #
     def page_url(index)
