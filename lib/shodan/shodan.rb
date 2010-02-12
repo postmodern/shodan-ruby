@@ -72,7 +72,7 @@ module Shodan
   #   The User-Agent aliases and strings.
   #
   def Shodan.user_agent_aliases
-    WWW::Mechanize::AGENT_ALIASES
+    Mechanize::AGENT_ALIASES
   end
 
   #
@@ -112,7 +112,7 @@ module Shodan
   end
 
   #
-  # Creates a new WWW::Mechanize agent.
+  # Creates a new `Mechanize` agent.
   #
   # @param [Hash] options
   #   Additional options.
@@ -138,17 +138,17 @@ module Shodan
   # @option :proxy [String] :password
   #   The password to authenticate with.
   #
-  # @example Creating a new Mechanize agent.
+  # @example Creating a new `Mechanize` agent.
   #   Shodan.web_agent
   #
-  # @example Creating a new Mechanize agent with a User-Agent alias.
+  # @example Creating a new `Mechanize` agent with a User-Agent alias.
   #   Shodan.web_agent(:user_agent_alias => 'Linux Mozilla')
   #
-  # @example Creating a new Mechanize agent with a User-Agent string.
+  # @example Creating a new `Mechanize` agent with a User-Agent string.
   #   Shodan.web_agent(:user_agent => 'Google Bot')
   #
   def Shodan.web_agent(options={},&block)
-    agent = WWW::Mechanize.new
+    agent = Mechanize.new
 
     if options[:user_agent_alias]
       agent.user_agent_alias = options[:user_agent_alias]
