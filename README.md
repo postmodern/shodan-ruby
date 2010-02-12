@@ -5,11 +5,11 @@
 * [github.com/postmodern/shodan-ruby/issues](http://github.com/postmodern/shodan-ruby/issues)
 * [shodan.surtri.com](http://shodan.surtri.com/)
 
-## DESCRIPTION:
+## Description
 
 A Ruby interface to SHODAN, a computer search engine.
 
-## FEATURES/PROBLEMS:
+## Features / Problems
 
 * Supports basic queries.
 * Supports `country` search operator.
@@ -19,7 +19,7 @@ A Ruby interface to SHODAN, a computer search engine.
 * SHODAN does not support queries with non-alphanumeric characters within
   them.
 
-## EXAMPLES:
+## Examples
 
 Basic query:
 
@@ -101,15 +101,15 @@ Select specific hosts from a page:
     page.responses_with("Server")
     # => [...]
 
-## REQUIREMENTS:
+## Requirements
 
 * [mechanize](http://mechanize.rubyforge.org) >= 0.9.3
 
-## INSTALL:
+## Install
 
     $ sudo gem install shodan-ruby
 
-## LICENSE:
+## License
 
 shodan-ruby - A Ruby interface to SHODAN, a computer search engine.
 
