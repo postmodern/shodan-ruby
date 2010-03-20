@@ -277,7 +277,7 @@ module Shodan
     #
     def Countries.each(&block)
       self.constants.each do |name|
-        block.call(self.constant_get(name)) if block
+        block.call(self.const_get(name)) if block
       end
 
       return self
