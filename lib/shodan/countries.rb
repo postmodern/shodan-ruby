@@ -266,10 +266,13 @@ module Shodan
     #
     # Iterates over every Country Code.
     #
-    # @yield [country]
-    #   The given block will receive every Country Code.
+    # @yield [country,code]
+    #   The given block will receive every Country Name and Code.
     #
     # @yieldparam [String] country
+    #   The name of the Country.
+    #
+    # @yieldparam [String] code
     #   The ISO 3166-1993 Country Code.
     #
     # @return [Countries]
@@ -277,7 +280,7 @@ module Shodan
     #
     def Countries.each(&block)
       self.constants.each do |name|
-        block.call(self.const_get(name)) if block
+        block.call(name,self.const_get(name)) if block
       end
 
       return self
