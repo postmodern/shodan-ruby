@@ -7,6 +7,7 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = 'shodan'
     gem.version = Shodan::VERSION
+    gem.license = 'MIT'
     gem.summary = %Q{A Ruby interface to SHODAN, a computer search engine.}
     gem.description = %Q{A Ruby interface to SHODAN, a computer search engine.}
     gem.email = 'postmodern.mod3@gmail.com'
