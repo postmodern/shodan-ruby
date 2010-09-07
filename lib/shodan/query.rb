@@ -36,7 +36,7 @@ module Shodan
     SEARCH_URL = 'http://shodan.surtri.com/'
 
     # Results per page
-    RESULTS_PER_PAGE = 20
+    RESULTS_PER_PAGE = 10
 
     # Search query
     attr_accessor :query
