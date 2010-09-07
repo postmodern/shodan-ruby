@@ -225,7 +225,7 @@ module Shodan
       Page.new do |new_page|
         doc = @agent.get(page_url(index))
 
-        doc.search('#search/div.result').each do |result|
+        doc.search('#search//div.result').each do |result|
           div = result.at('div')
 
           ip = if (a = div.at('a'))
@@ -234,11 +234,11 @@ module Shodan
                  div.children.first.inner_text
                end
 
-          hostname = if (host_node = result.at('div/a:last'))
+          hostname = if (host_node = div.at('a:last'))
                        host_node.inner_text
                      end
 
-          date = result.at('div/span').inner_text.scan(/\d+\.\d+\.\d/).first
+          date = div.at('span').inner_text.scan(/\d+\.\d+\.\d/).first
           response = result.at('p').inner_text.strip
 
           new_page << Host.new(ip,date,response,hostname)
