@@ -18,12 +18,12 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #
 
-require 'shodan/extensions/uri'
 require 'shodan/countries'
 require 'shodan/has_pages'
 require 'shodan/page'
 require 'shodan/shodan'
 
+require 'uri/query_params'
 require 'net/http'
 require 'nokogiri'
 
